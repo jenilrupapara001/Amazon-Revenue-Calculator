@@ -3,7 +3,7 @@ import { AsinItem, ReferralFee, ClosingFee, ShippingFee, StorageFee, User, Categ
 
 const API_BASE =
   (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_URL) ||
-  'https://kitnamilegaamazon.vercel.app/api';
+  'https://fba-backend-nod9.onrender.com/api';
 
 const request = async <T>(path: string, options: RequestInit = {}, fallback: T): Promise<T> => {
   try {
