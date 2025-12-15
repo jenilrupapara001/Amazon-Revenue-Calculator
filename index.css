@@ -1,0 +1,87 @@
+/* Global design tokens and base styles for FBA Pro
+   Provides a neutral professional theme and component helpers
+*/
+:root{
+  --bg: #f8fafc; /* slate-50 */
+  --surface: #ffffff;
+  --muted: #64748b; /* slate-500 */
+  --text: #0f172a; /* slate-900 */
+  /* Amazon brand colors */
+  --brand: #FF9900; /* Amazon Orange */
+  --brand-dark: #E47911; /* Darker Amazon Orange */
+  --accent: #146EB4; /* Amazon Blue */
+  --success: #16a34a; /* green-600 */
+  --danger: #dc2626; /* red-600 */
+  --glass: rgba(255,255,255,0.6);
+  --card-radius: 12px;
+  --card-pad: 1rem;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,0.04);
+  --shadow-md: 0 6px 18px rgba(15,23,42,0.08);
+}
+
+/* Normalize tweaks */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Container */
+.app-wrapper{max-width:1200px;margin:0 auto;padding:1rem}
+
+/* Card - consistent look */
+.card {
+  background: var(--surface);
+  border-radius: var(--card-radius);
+  padding: var(--card-pad);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(15,23,42,0.04);
+}
+.card--elevated{box-shadow:var(--shadow-md)}
+
+/* Buttons - base styles; Tailwind still usable but these provide consistent tokens */
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;justify-content:center;border-radius:8px;padding:0.5rem 0.9rem;font-weight:600;border:1px solid transparent;cursor:pointer;transition:all .12s ease
+}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn--primary{background:var(--brand);color:white;border-color:var(--brand-dark)}
+.btn--primary:hover{background:var(--brand-dark)}
+.btn--secondary{background:white;color:var(--text);border-color:rgba(15,23,42,0.06)}
+.btn--ghost{background:transparent;color:var(--muted)}
+
+/* Badge styles */
+.badge{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.28rem .6rem;border-radius:9999px;font-size:.75rem;font-weight:600;background:rgba(15,23,42,0.03)
+}
+.badge--dot{padding:.25rem .5rem}
+
+/* Table polish */
+.table{
+  width:100%;border-collapse:collapse;background:var(--surface);border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm);
+}
+.table th{background:linear-gradient(180deg, rgba(250,250,250,1), rgba(245,245,245,1));font-size:.75rem;text-transform:uppercase;letter-spacing:.02em;padding:.75rem 1rem;color:var(--muted);text-align:left;border-bottom:1px solid rgba(15,23,42,0.04)}
+.table td{padding:.75rem 1rem;border-bottom:1px solid rgba(15,23,42,0.03);vertical-align:middle}
+.table tr:hover td{background:rgba(15,23,42,0.01)}
+.table .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+.table .number{text-align:right}
+
+/* Small helpers */
+.kv{display:flex;gap:0.5rem;align-items:center}
+.small{font-size:.85rem;color:var(--muted)}
+.lead{font-weight:600}
+
+/* Improved header */
+.header-bar{background:var(--surface);border-bottom:1px solid rgba(15,23,42,0.04);box-shadow:0 1px 0 rgba(0,0,0,0.02)}
+
+/* responsive tweaks */
+@media (min-width: 1024px){.app-wrapper{padding:1.5rem}}
+
+/* Accessibility focus */
+:focus{outline:3px solid rgba(255,153,0,0.12);outline-offset:2px}
+
+/* Utility for subtle separators */
+.sep{height:1px;background:rgba(15,23,42,0.03);width:100%}
