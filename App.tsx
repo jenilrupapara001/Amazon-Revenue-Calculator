@@ -81,8 +81,8 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
       {/* Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <div className="flex flex-col items-center gap-3 mb-2">
-          <div className="h-14 w-14 rounded-2xl bg-white shadow-md shadow-slate-200/70 border border-slate-100 flex items-center justify-center overflow-hidden">
-            <img src="/assets/amazon-in-logo.png" alt="Amazon" className="h-10 w-10 object-contain" />
+          <div className="h-28 w-full max-w-96 rounded-2xl bg-white shadow-md shadow-slate-200/70 border border-slate-100 flex items-center justify-center overflow-hidden px-6">
+            <img src="/assets/black-amazon.png" alt="Amazon" className="h-full w-full object-contain" />
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">
             <IndianRupee className="h-4 w-4" />

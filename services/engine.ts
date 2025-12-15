@@ -14,14 +14,17 @@ const calculateReturnFee = (price: number, stepLevel: string, category: string, 
     const priceRange = refundFees.find(rf => price >= rf.minPrice && price <= rf.maxPrice);
     if (!priceRange) return 0;
 
-    // Determine if it's apparel/shoes category (they have different rates)
-    const isApparelOrShoes = (category || '').toLowerCase().includes('apparel') ||
-                            (category || '').toLowerCase().includes('shoes') ||
-                            (category || '').toLowerCase().includes('clothing');
-    
-    // Use apparel category for apparel/shoes items, general for others
+    // Determine refund fee category: Shoes have their own table, Apparel/Clothing share apparel table, otherwise General
+    const cat = (category || '').toLowerCase();
+    let feeCategory: RefundFee['category'] = 'General';
+    if (cat.includes('shoes') || cat.includes('footwear')) {
+      feeCategory = 'Shoes';
+    } else if (cat.includes('apparel') || cat.includes('clothing')) {
+      feeCategory = 'Apparel';
+    }
+
     const applicableFee = refundFees.find(rf =>
-      rf.category === (isApparelOrShoes ? 'Apparel' : 'General') &&
+      rf.category === feeCategory &&
       price >= rf.minPrice && price <= rf.maxPrice
     );
     
@@ -490,7 +493,7 @@ export const calculateProfits = async (asins: AsinItem[]) => {
           referralFee, closingFee, shippingFee: weightHandlingFee, pickAndPackFee, storageFee: calculatedStorageFee,
           tax: otherCost, totalFees: totalDeductions, netRevenue: netProfit, marginPercent: netMargin,
           stepLevel: stepLevel, // Ensure STEP level is saved/updated
-          returnFee: returnCostExcludingReferral,
+          returnFee: refundProcessingFee, // returnFee should reflect only the refund processing component
           lossPerReturn: returnCostExcludingReferral,
           status: 'calculated', calculatedAt: new Date().toISOString()
         });

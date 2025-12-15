@@ -101,7 +101,12 @@ const INITIAL_STORAGE = [
 ];
 
 async function connectMongo() {
-  client = new MongoClient(MONGO_URL);
+  // Force TLS for hosted environments like Render where Atlas requires it.
+  // Using Server API v1 keeps the handshake stable across driver versions.
+  client = new MongoClient(MONGO_URL, {
+    tls: true,
+    serverApi: { version: '1' },
+  });
   await client.connect();
   db = client.db(DB_NAME);
   console.log(`[Server] Connected to MongoDB database "${DB_NAME}"`);
