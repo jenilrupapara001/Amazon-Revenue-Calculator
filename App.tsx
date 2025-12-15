@@ -77,24 +77,30 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
       {/* Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white shadow-sm mb-4">
-          <IndianRupee className="h-8 w-8 text-blue-600" />
+        <div className="flex flex-col items-center gap-3 mb-2">
+          <div className="h-14 w-14 rounded-2xl bg-white shadow-md shadow-slate-200/70 border border-slate-100 flex items-center justify-center overflow-hidden">
+            <img src="/assets/amazon-in-logo.png" alt="Amazon" className="h-10 w-10 object-contain" />
+          </div>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">
+            <IndianRupee className="h-4 w-4" />
+            Enterprise Profitability Suite
+          </div>
         </div>
 
         <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
           Amazon FBA Pro
         </h2>
         <p className="mt-2 text-sm text-slate-600">
-          Enterprise Profitability Calculator
+          Secure access for your global finance and operations teams.
         </p>
       </div>
 
       {/* Login Card */}
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-6 shadow-xl shadow-slate-200/60 border border-slate-100 rounded-xl">
+        <div className="bg-white py-10 px-8 shadow-2xl shadow-slate-200/80 border border-slate-100 rounded-2xl">
           <form
             className="space-y-6"
             onSubmit={handleSubmit}
@@ -107,6 +113,7 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
               required
               value={email}
               onChange={(e: any) => setEmail(e.target.value)}
+              inputClassName="h-11 text-sm"
             />
 
             <Input
@@ -116,6 +123,7 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
               required
               value={password}
               onChange={(e: any) => setPassword(e.target.value)}
+              inputClassName="h-11 text-sm"
             />
 
             {error && (
@@ -128,7 +136,7 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full justify-center text-sm font-medium"
+              className="w-full justify-center text-sm font-semibold h-11"
             >
               {loading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -136,6 +144,10 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
                 'Sign in'
               )}
             </Button>
+
+            <p className="text-xs text-slate-500 text-center">
+              Protected enterprise workspace · Encrypted locally · SSO-ready
+            </p>
           </form>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { AsinItem, ReferralFee, ClosingFee, ShippingFee, StorageFee, User, Categ
 
 const API_BASE =
   (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_URL) ||
-  'http://localhost:5001/api';
+  'https://kitnamilegaamazon.vercel.app/api';
 
 const request = async <T>(path: string, options: RequestInit = {}, fallback: T): Promise<T> => {
   try {
