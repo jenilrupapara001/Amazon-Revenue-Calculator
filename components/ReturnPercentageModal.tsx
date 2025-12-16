@@ -39,21 +39,26 @@ export const ReturnPercentageModal: React.FC<ReturnPercentageModalProps> = ({
                           (item.category || '').toLowerCase().includes('shoes') ||
                           (item.category || '').toLowerCase().includes('clothing');
   
-  let returnFee = 0;
-  // Calculate return fee based on STEP level and price (no return percentage required)
+  let refundProcessingFee = 0;
+  // Calculate return processing fee based on STEP level and price (no return percentage required)
   if (price <= 300) {
-    returnFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 30 : stepLevel === 'Standard' ? 27 : stepLevel === 'Advanced' ? 24 : 24)
+    refundProcessingFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 30 : stepLevel === 'Standard' ? 27 : stepLevel === 'Advanced' ? 24 : 24)
                                 : (stepLevel === 'Basic' ? 50 : stepLevel === 'Standard' ? 45 : stepLevel === 'Advanced' ? 40 : 40);
   } else if (price <= 500) {
-    returnFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 45 : stepLevel === 'Standard' ? 42 : stepLevel === 'Advanced' ? 39 : 39)
+    refundProcessingFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 45 : stepLevel === 'Standard' ? 42 : stepLevel === 'Advanced' ? 39 : 39)
                                 : (stepLevel === 'Basic' ? 75 : stepLevel === 'Standard' ? 70 : stepLevel === 'Advanced' ? 65 : 65);
   } else if (price <= 1000) {
-    returnFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 60 : stepLevel === 'Standard' ? 57 : stepLevel === 'Advanced' ? 51 : 51)
+    refundProcessingFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 60 : stepLevel === 'Standard' ? 57 : stepLevel === 'Advanced' ? 51 : 51)
                                 : (stepLevel === 'Basic' ? 100 : stepLevel === 'Standard' ? 95 : stepLevel === 'Advanced' ? 85 : 85);
   } else {
-    returnFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 84 : stepLevel === 'Standard' ? 78 : stepLevel === 'Advanced' ? 66 : 66)
+    refundProcessingFee = isApparelOrShoes ? (stepLevel === 'Basic' ? 84 : stepLevel === 'Standard' ? 78 : stepLevel === 'Advanced' ? 66 : 66)
                                 : (stepLevel === 'Basic' ? 140 : stepLevel === 'Standard' ? 130 : stepLevel === 'Advanced' ? 110 : 110);
   }
+
+  const totalFees = item.totalFees || 0;
+  const referralFee = item.referralFee || 0;
+  const nonReferralFees = Math.max(0, totalFees - referralFee);
+  const returnFee = Number((nonReferralFees + refundProcessingFee).toFixed(2));
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

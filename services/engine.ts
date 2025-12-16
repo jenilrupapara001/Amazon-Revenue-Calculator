@@ -476,15 +476,16 @@ export const calculateProfits = async (asins: AsinItem[]) => {
         const stepLevel = item.stepLevel || 'Standard';
         const refundProcessingFee = calculateReturnFee(price, stepLevel, item.category || '', refundFees);
         
-        // Calculate return processing cost (exclude referral fees from return cost)
-        // Return cost includes: closing + shipping + pick & pack + storage + GST + refund processing fee
-        const returnCostExcludingReferral = Number((closingFee + weightHandlingFee + pickAndPackFee + calculatedStorageFee + otherCost + refundProcessingFee).toFixed(2));
+        // Return fee = (total fees - referral fee) + refund processing fee
+        const nonReferralFees = Math.max(0, totalDeductions - referralFee);
+        const returnCostExcludingReferral = Number((nonReferralFees + refundProcessingFee).toFixed(2));
         
         console.log(`[FeeCalc] Return fee calc for ${item.asin}:`, {
           price,
           stepLevel,
           category: item.category,
           refundProcessingFee,
+          nonReferralFees,
           returnCostExcludingReferral,
           refundFeesCount: refundFees.length
         });
@@ -493,7 +494,7 @@ export const calculateProfits = async (asins: AsinItem[]) => {
           referralFee, closingFee, shippingFee: weightHandlingFee, pickAndPackFee, storageFee: calculatedStorageFee,
           tax: otherCost, totalFees: totalDeductions, netRevenue: netProfit, marginPercent: netMargin,
           stepLevel: stepLevel, // Ensure STEP level is saved/updated
-          returnFee: refundProcessingFee, // returnFee should reflect only the refund processing component
+          returnFee: returnCostExcludingReferral, // full return cost excluding referral + refund processing
           lossPerReturn: returnCostExcludingReferral,
           status: 'calculated', calculatedAt: new Date().toISOString()
         });
