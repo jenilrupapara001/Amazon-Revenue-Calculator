@@ -19,7 +19,7 @@ A comprehensive, offline-first Amazon FBA profitability calculator designed spec
 ### Advanced Features
 - **Configurable Fee Masters**: Import and manage fee structures via CSV with specialized parsers
 - **Category Mapping**: Intelligent mapping between Keepa categories and fee categories
-- **Node ID Mapping**: Direct category node ID mapping for precise fee calculations
+- **Node ID Mapping**: Direct category node ID mapping for preciseSTEP level fee calculations
 - **Fuzzy Matching**: Advanced category matching algorithms for accurate fee application
 - **Performance Optimized**: Client-side pagination and search for datasets with 20k+ entries
 - **Offline-First**: IndexedDB persistence with hybrid server-sync fallback
